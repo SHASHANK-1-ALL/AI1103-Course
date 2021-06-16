@@ -1,0 +1,264 @@
+\documentclass{beamer}
+\usepackage{listings}
+\lstset{
+%language=C,
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+\usepackage{blkarray}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{tkz-euclide} % loads  TikZ and tkz-base
+%\usetkzobj{all}
+\usetikzlibrary{calc,math}
+\usepackage{float}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+\usepackage[export]{adjustbox}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+\usetheme{Boadilla}
+\providecommand{\sbrak}[1]{\ensuremath{{}\left[#1\right]}}
+\providecommand{\lsbrak}[1]{\ensuremath{{}\left[#1\right.}}
+\providecommand{\rsbrak}[1]{\ensuremath{{}\left.#1\right]}}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\lbrak}[1]{\ensuremath{\left(#1\right.}}
+\providecommand{\rbrak}[1]{\ensuremath{\left.#1\right)}}
+\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+\providecommand{\lcbrak}[1]{\ensuremath{\left\{#1\right.}}
+\providecommand{\rcbrak}[1]{\ensuremath{\left.#1\right\}}}
+
+\title{CSIR-UGC NET-June 2013-Problem(57)}
+\author{Shashank Shanbhag}
+\date{CS20BTECH11061} 
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Pre-requisites}
+    \begin{block}{Some important things to understand}
+      \begin{enumerate}
+        \item Meaning of notation \textbf{(A,B)} $\mathbf{\sim N_2}$\textbf{(b,c,d,e,f)}
+        \item \textbf{Dot product} in terms of \textbf{matrix multiplication}
+        \item Finding \textbf{Covariance by matrix method}
+      \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+    \begin{block}{Meaning of notation (A,B) $\sim N_2$(b,c,d,e,f)}
+     $N_2$ represents a bivariate normal distribution (bivariate since the number in the subscript of N is 2, which also represents the number of variables) with
+     \begin{align}
+         &b = E(A) \\
+         &c = E(B) \\
+         &d = Var(A) \\
+         &e = Var(B) \\
+         &f = \rho(A,B)
+     \end{align}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{block}{Dot product in terms of matrix multiplication}
+     If we have two vectors A and B, then their dot product can be written in matrix form as:\\
+     \begin{equation}
+         \vec{A} \cdot \vec{B} = \vec{A^\top} \vec{B} 
+     \end{equation}
+    where A and B are column matrices.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{block}{Covariance by matrix method}
+        We can write A and B as:
+        \begin{align}
+            \vec{A} = \myvec{1 \\ 0}^\top \myvec{A \\ B} = \vec{C^\top} \vec{E} \\
+            \vec{B} = \myvec{0 \\ 1}^\top \myvec{A \\ B} = \vec{D^\top} \vec{E}
+        \end{align}
+      Covariance of A and B will be defined as:
+      \begin{equation}
+          Cov(A,B) = \vec{C^\top} \Sigma \vec{D}
+      \end{equation}
+      Similarly it can be shown that:
+      \begin{equation}
+          Cov(B,A) = \vec{D^\top} \Sigma \vec{C}
+      \end{equation}
+      Also,
+      \begin{equation}
+         Var(A) = Cov(A,A) = \vec{C^\top} \Sigma \vec{C}
+      \end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{}
+    \begin{block}{}
+    Similarly,
+    \begin{equation}
+         Var(B) = Cov(B,B) = \vec{D^\top} \Sigma \vec{D}
+      \end{equation}
+     where,
+      \begin{align}
+         \vec{C} = \myvec{1 \\ 0}\\
+         \vec{D} = \myvec{0 \\ 1}\\
+         \vec{E} = \myvec{A \\ B}
+     \end{align}
+    \end{block}
+    \begin{block}{Note}
+        Here $\Sigma$ is the Covariance matrix of A and B always.\\
+        This means  that even if you are finding Cov(A+B,A-B) , Var(A+B) or Var(A-B), $\Sigma$ does not change only C and D will vary.
+     \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Question}
+    \begin{block}{CSIR-UGC NET-June 2013-Problem(57)}
+    (X,Y) follows bivariate normal distribution $N_2$(0,0,1,1,$\rho$),  -1 $<$ $\rho$ $<$ 1. Then,
+    \begin{enumerate}
+    \item X+Y and X-Y are uncorrelated only if $\rho$ = 0
+    \item X+Y and X-Y are uncorrelated only if $\rho$ $<$ 0
+    \item X+Y and X-Y are uncorrelated only if $\rho$ $>$ 0
+    \item X+Y and X-Y are uncorrelated for all values of $\rho$
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution}
+    Given that 
+    \begin{equation}
+       \vec{M} = \myvec{ X \\ Y}
+      \sim N \begin{bmatrix}
+        \myvec{0 \\ 0},
+        \begin{pmatrix}
+            1 & \rho\\
+            \rho & 1 
+        \end{pmatrix}
+        \end{bmatrix}
+    \end{equation}
+
+    Here, Mean matrix of X and Y is:
+    \begin{equation}
+        \mu = \myvec{0 \\ 0}
+    \end{equation}
+    Covariance matrix of X and Y is:
+    \begin{equation}
+    \Sigma = \begin{pmatrix}
+                1 & \rho\\
+                \rho & 1 
+            \end{pmatrix}
+    \end{equation}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Solution Contd.}
+     Now X+Y and X-Y can be written as:
+    \begin{equation}
+        X+Y = \myvec{1 \\ 1} ^\top
+                \myvec{X \\ Y}
+        = \vec{A^\top} \vec{M}
+    \end{equation}
+    \begin{equation}
+        X-Y = \myvec{1 \\ -1} ^\top
+                \myvec{X \\ Y}
+        =\vec{B^\top} \vec{M}
+    \end{equation}
+    where
+    \begin{equation}
+     \vec{A} = \myvec{1 \\ 1}
+    \end{equation}
+    and
+    \begin{equation}
+        \vec{B} = \myvec{1 \\ -1}
+    \end{equation}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution Contd.} 
+  Defining Covariance in terms of expectation value:
+    \begin{align}
+        Cov(X,Y) &= E[(X-\mu_x)(Y-\mu_y)] \\
+        &= E[(X-0)(Y-0)]\\
+        &= E(XY)
+    \end{align}
+ Finding Covariance of X+Y and X-Y:
+    \begin{align}
+     Cov(X+Y,X-Y) &= \vec{A^\top} \Sigma \vec{B} \\
+        &= \myvec{1 \\ 1}^\top
+        \begin{pmatrix}
+                1 & \rho\\
+                \rho & 1 
+            \end{pmatrix}
+            \myvec{1 \\ -1}\\ 
+        &= \myvec{1+\rho \\ 1+\rho}^\top
+            \myvec{1 \\ -1}\\
+        &= (1+\rho)-1(1+\rho) \\
+        &=   0
+    \end{align}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution Contd.} 
+      Note that 
+    \begin{align}
+    Var(X+Y) = Cov(X+Y , X+Y)\\ 
+     Var(X-Y)  = Cov(X-Y , X-Y)
+    \end{align}
+    Hence,
+    \begin{align}
+        Var(X+Y) &=\vec{A^\top} \Sigma \vec{A} \\
+            &= \myvec{1 \\ 1}^\top
+             \begin{pmatrix}
+                1 & \rho\\
+                \rho & 1 
+            \end{pmatrix}
+            \myvec{1 \\ 1}\\
+        &= \myvec{1+\rho \\ 1+\rho}^\top
+            \myvec{1 \\ 1}\\
+        &= 1+\rho+1+\rho \\
+        &= 2+2\rho \neq 0
+    \end{align}
+\end{frame}
+
+    \begin{frame}
+      \frametitle{Solution Contd.}
+      \begin{align}
+        Var(X-Y) &= \vec{B^\top} \Sigma \vec{B} \\
+            &= \myvec{1 \\ -1}^\top
+        \begin{pmatrix}
+                1 & \rho\\
+                \rho & 1 
+            \end{pmatrix}
+             \myvec{1 \\ -1}\\
+        &= \myvec{1-\rho \\ \rho-1}^\top
+            \myvec{1 \\ -1}\\
+        &= 1-\rho-\rho+1 \\
+        &= 2-2\rho \neq 0
+    \end{align}
+    
+    So correlation coefficient is:
+    \begin{equation}
+        \rho(X+Y,X-Y) = \frac{Cov(X+Y,X-Y)}{\sqrt{var(X+Y) \times var(X-Y)}}
+        = 0
+    \end{equation}
+\end{frame}
+
+ \begin{frame}
+  \frametitle{Solution Contd.} 
+   Hence, X+Y and X-Y are uncorrelated irrespective of value of $\rho$ where $\rho \in \brak{-1,1}$.\\
+    Therefore, the correct answer is \textbf{option 4}.
+\end{frame}
+
+\end{document}
